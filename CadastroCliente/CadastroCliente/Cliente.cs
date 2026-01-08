@@ -1,4 +1,4 @@
-﻿class Clientes() { 
+﻿class Cliente() { 
     public string nome { get; set; }
     public string email { get; set; }
     public string cpf_cnpj { get; set; }

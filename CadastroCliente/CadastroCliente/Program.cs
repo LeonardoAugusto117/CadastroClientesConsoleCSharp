@@ -8,7 +8,7 @@ string mensagem = "Bem-vindo ao sistema de cadastro de clientes!";
 //List<string> clientes = new List<string> {};
 //List<string> cpfs = new List<string> {};
 
-List<Clientes> listaClientes = new List<Clientes>();
+List<Cliente> listaClientes = new List<Cliente>();
 
 void exbirLogo()
 {
@@ -81,7 +81,7 @@ void cadastroCliente()
     // Loop para cadastrar múltiplos clientes
     while (opcao == "1")
     {
-        Clientes clientes = new Clientes();
+        Cliente clientes = new Cliente();
 
         Console.WriteLine("Informe o nome do cliente:");
         clientes.nome = Console.ReadLine();
@@ -124,7 +124,7 @@ void exibirListarClientes()
     }
     else
     {
-        foreach (Clientes cliente in listaClientes)
+        foreach (Cliente cliente in listaClientes)
         {
             cliente.ExibirClientes();
         }
@@ -144,10 +144,10 @@ void buscarCliCpf()
     Console.WriteLine("Informe o CPF do cliente que deseja buscar:");
     String cpfBusca = Console.ReadLine();
 
-    Clientes clienteEncontrado = null;
+    Cliente clienteEncontrado = null;
 
     // Procurar o cliente na lista pelo CPF
-    foreach (Clientes cliente in listaClientes)
+    foreach (Cliente cliente in listaClientes)
     {
         if (cliente.cpf_cnpj == cpfBusca)
         {
@@ -183,10 +183,10 @@ void removerClientes()
     Console.WriteLine("Informe o CPF do cliente que deseja remover:");
     string cpfRemover = Console.ReadLine();
 
-    Clientes clienteEncontrado = null;
+    Cliente clienteEncontrado = null;
 
     // Procurar o cliente na lista pelo CPF
-    foreach (Clientes cliente in listaClientes)
+    foreach (Cliente cliente in listaClientes)
     {
         if (cliente.cpf_cnpj == cpfRemover)
         {
@@ -224,7 +224,5 @@ void ExibirTituloDaOpcao(string titulo)
     Console.WriteLine(titulo);
     Console.WriteLine(asteriscos + "\n");
 }
-
-
 
 exibirMenu();
