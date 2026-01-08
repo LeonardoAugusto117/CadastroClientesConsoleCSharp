@@ -100,7 +100,7 @@ void cadastroCliente()
         Console.WriteLine("Informe o email do cliente:");
         clientes.email = Console.ReadLine();
 
-        Console.WriteLine($"Cliente {clientes.nome} com email {clientes.email} e o CPF: {clientes.cpf} cadastrado com sucesso!\n");
+        Console.WriteLine($"Cliente {clientes.nome} com email {clientes.email} e o CPF: {clientes.cpf_cnpj} cadastrado com sucesso!\n");
         Console.WriteLine("Deseja cadastrar outro cliente? (1 - Sim / 2 - Não)");
 
         // Adiciona o cliente à lista
