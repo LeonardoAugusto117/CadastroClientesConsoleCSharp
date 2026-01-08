@@ -199,7 +199,7 @@ void removerClientes()
     if (clienteEncontrado != null)
     {
         listaClientes.Remove(clienteEncontrado);
-        Console.WriteLine($"\nCliente {clienteEncontrado.nome} removido com sucesso!");
+        Console.WriteLine($"\nCliente: {clienteEncontrado.nome} removido com sucesso!");
     }
 
     else
