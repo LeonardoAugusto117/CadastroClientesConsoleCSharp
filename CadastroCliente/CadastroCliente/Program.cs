@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading;
 
 string mensagem = "Bem-vindo ao sistema de cadastro de clientes!";
 //Dictionary<string, List<int>> clientes = new Dictionary<string, List<int>>();
-List<string> emails = new List<string> {};
-List<string> clientes = new List<string> {};
-List<string> cpfs = new List<string> {};
+//List<string> emails = new List<string> {};
+//List<string> clientes = new List<string> {};
+//List<string> cpfs = new List<string> {};
 
-
+List<Clientes> listaClientes = new List<Clientes>();
 
 void exbirLogo()
 {
@@ -47,18 +48,23 @@ void exibirMenu()
         case 1:
             cadastroCliente();
             break;
+
         case 2:
             exibirListarClientes();
             break;
+
         case 3:
             buscarCliCpf();
             break;
+
         case 4:
             removerClientes();
             break;
+
         case 5:
             Console.WriteLine("Tecleque 5 para sair");
             break;
+
         default:
             Console.WriteLine("Opção inválida. Tente novamente.");
             break;
@@ -72,61 +78,51 @@ void cadastroCliente()
 
     var opcao = "1";
 
+    // Loop para cadastrar múltiplos clientes
     while (opcao == "1")
     {
+        Clientes clientes = new Clientes();
+
         Console.WriteLine("Informe o nome do cliente:");
-        string nome = Console.ReadLine();
-        clientes.Add(nome);
+        clientes.nome = Console.ReadLine();
+
         Console.WriteLine("Informe o CPF:");
-        string cpf = Console.ReadLine();
-
-        if (cpf.Length != 11)
-        {
-            Console.WriteLine("CPF inválido. Deve conter 11 dígitos.");
-            Console.WriteLine("Você retornará ao menu");
-            Thread.Sleep(1000);
-            exibirMenu();
-        }
-
-        if (cpfs.Contains(cpf))
-        {
-            Console.WriteLine("CPF já cadastrado.");
-            Thread.Sleep(1500);
-            exibirMenu();
-        }
-        cpfs.Add(cpf);
-
+        clientes.cpf = Console.ReadLine();
 
         Console.WriteLine("Informe o email do cliente:");
-        string email = Console.ReadLine();
-        emails.Add(email);
+        clientes.email = Console.ReadLine();
 
-        Console.WriteLine($"Cliente {nome} com email {email} cadastrado com sucesso!\n");
+        Console.WriteLine($"Cliente {clientes.nome} com email {clientes.email} e o CPF: {clientes.cpf} cadastrado com sucesso!\n");
         Console.WriteLine("Deseja cadastrar outro cliente? (1 - Sim / 2 - Não)");
 
-
+        // Adiciona o cliente à lista
+        listaClientes.Add(clientes);
 
         opcao = Console.ReadLine();
         Console.Clear();
     }
-
 
     Thread.Sleep(1000);
     exibirMenu();
 
 
 }
+
 void exibirListarClientes()
 {
     Console.Clear();
     ExibirTituloDaOpcao("Listar Clientes");
 
-    for (int i = 0; i < clientes.Count; i++)
+    if (listaClientes.Count == 0)
     {
-        Console.WriteLine(
-            $"Nome: {clientes[i]} | Email: {emails[i]} | CPF: {cpfs[i]}"
-        );
-        Console.WriteLine("--------------------------------");
+        Console.WriteLine("Nenhum cliente cadastrado.");
+    }
+    else
+    {
+        foreach (Clientes cliente in listaClientes)
+        {
+            cliente.ExibirClientes();
+        }
     }
 
     Console.WriteLine("\nAperte qualquer tecla para voltar");
@@ -141,23 +137,39 @@ void buscarCliCpf()
     Console.Clear();
 
     Console.WriteLine("Informe o CPF do cliente que deseja buscar:");
-    string cpfBusca = Console.ReadLine();
-    int index = cpfs.IndexOf(cpfBusca);
+    String cpfBusca = Console.ReadLine();
 
-    if (index != -1)
+    Clientes clienteEncontrado = null;
+
+    // Procurar o cliente na lista pelo CPF
+    foreach (Clientes cliente in listaClientes)
     {
-        Console.WriteLine($"Cliente encontrado: {clientes[index]}, Email: {emails[index]}, CPF: {clientes[index]}");
+        if (cliente.cpf == cpfBusca)
+        {
+            clienteEncontrado = cliente;
+            break;
+        }
+    }
+
+    // Exibir informações do cliente encontrado
+    if (clienteEncontrado != null)
+    {
+        Console.WriteLine("\nCliente encontrado:");
+        clienteEncontrado.ExibirInfo();
     }
     else
     {
-        Console.WriteLine("Cliente não encontrado.");
+        Console.WriteLine("\nCliente não encontrado.");
     }
+
 
     Console.WriteLine("\nAperte a tecla X para sair");
     Console.ReadKey();
     exibirMenu();
 
 }
+
+
 void removerClientes()
 {
     ExibirTituloDaOpcao("Remover Cliente cadastrado");
@@ -165,19 +177,33 @@ void removerClientes()
 
     Console.WriteLine("Informe o CPF do cliente que deseja remover:");
     string cpfRemover = Console.ReadLine();
-    int index = cpfs.IndexOf(cpfRemover);
+    Clientes clienteEncontrado = null;
 
-    if (index != -1)
+    // Procurar o cliente na lista pelo CPF
+    foreach (Clientes cliente in listaClientes)
     {
-        Console.WriteLine($"Cliente {clientes[index]} removido com sucesso.");
-        clientes.RemoveAt(index);
-        cpfs.RemoveAt(index);
-        emails.RemoveAt(index);
+        if (cliente.cpf == cpfRemover)
+        {
+            clienteEncontrado = cliente;
+            break;
+        }
     }
+
+    // Remover o cliente se encontrado
+    if (clienteEncontrado != null)
+    {
+        listaClientes.Remove(clienteEncontrado);
+        Console.WriteLine($"\nCliente {clienteEncontrado.nome} removido com sucesso!");
+    }
+
     else
     {
-        Console.WriteLine("Cliente não encontrado.");
+        Console.WriteLine("\nCliente não encontrado.");
     }
+
+    Console.WriteLine("\nAperte a tecla X para sair");
+    Console.ReadKey();
+    exibirMenu();
 
 }
 
