@@ -86,8 +86,16 @@ void cadastroCliente()
         Console.WriteLine("Informe o nome do cliente:");
         clientes.nome = Console.ReadLine();
 
-        Console.WriteLine("Informe o CPF:");
-        clientes.cpf = Console.ReadLine();
+        Console.WriteLine("Informe o CPF/CPNJ:");
+        clientes.cpf_cnpj = Console.ReadLine();
+
+        if (clientes.cpf_cnpj.Length != 11 && clientes.cpf_cnpj.Length != 14)
+        {
+            Console.WriteLine("CPF inválido. Deve conter 11 números.");
+            Console.ReadKey();
+            Console.Clear();
+            continue;
+        }
 
         Console.WriteLine("Informe o email do cliente:");
         clientes.email = Console.ReadLine();
@@ -104,8 +112,6 @@ void cadastroCliente()
 
     Thread.Sleep(1000);
     exibirMenu();
-
-
 }
 
 void exibirListarClientes()
@@ -113,8 +119,7 @@ void exibirListarClientes()
     Console.Clear();
     ExibirTituloDaOpcao("Listar Clientes");
 
-    if (listaClientes.Count == 0)
-    {
+    if (listaClientes.Count == 0){
         Console.WriteLine("Nenhum cliente cadastrado.");
     }
     else
@@ -144,7 +149,7 @@ void buscarCliCpf()
     // Procurar o cliente na lista pelo CPF
     foreach (Clientes cliente in listaClientes)
     {
-        if (cliente.cpf == cpfBusca)
+        if (cliente.cpf_cnpj == cpfBusca)
         {
             clienteEncontrado = cliente;
             break;
@@ -177,12 +182,13 @@ void removerClientes()
 
     Console.WriteLine("Informe o CPF do cliente que deseja remover:");
     string cpfRemover = Console.ReadLine();
+
     Clientes clienteEncontrado = null;
 
     // Procurar o cliente na lista pelo CPF
     foreach (Clientes cliente in listaClientes)
     {
-        if (cliente.cpf == cpfRemover)
+        if (cliente.cpf_cnpj == cpfRemover)
         {
             clienteEncontrado = cliente;
             break;

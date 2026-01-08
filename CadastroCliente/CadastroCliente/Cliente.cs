@@ -1,12 +1,12 @@
 ﻿class Clientes() { 
     public string nome { get; set; }
     public string email { get; set; }
-    public string cpf { get; set; }
+    public string cpf_cnpj { get; set; }
 
 
     public void ExibirInfo()
     {
-        Console.WriteLine($"Nome: {nome} | Email: {email} | CPF: {cpf}");
+        Console.WriteLine($"Nome: {nome} | Email: {email} | CPF: {cpf_cnpj}");
     }
 
     public void ExibirClientes()
