@@ -4,7 +4,7 @@ using System.Threading;
 
 string mensagem = "Bem-vindo ao sistema de cadastro de clientes!";
 //Dictionary<string, List<int>> clientes = new Dictionary<string, List<int>>();
-//List<string> emails = new List<string> {};
+//List<string> Emails = new List<string> {};
 //List<string> clientes = new List<string> {};
 //List<string> cpfs = new List<string> {};
 
@@ -83,13 +83,13 @@ void cadastroCliente()
     {
         Cliente clientes = new Cliente();
 
-        Console.WriteLine("Informe o nome do cliente:");
-        clientes.nome = Console.ReadLine();
+        Console.WriteLine("Informe o Nome do cliente:");
+        clientes.Nome = Console.ReadLine();
 
         Console.WriteLine("Informe o CPF/CPNJ:");
-        clientes.cpf_cnpj = Console.ReadLine();
+        clientes.Cpf_cnpj = Console.ReadLine();
 
-        if (clientes.cpf_cnpj.Length != 11 && clientes.cpf_cnpj.Length != 14)
+        if (clientes.Cpf_cnpj.Length != 11 && clientes.Cpf_cnpj.Length != 14)
         {
             Console.WriteLine("CPF inválido. Deve conter 11 números.");
             Console.ReadKey();
@@ -97,10 +97,10 @@ void cadastroCliente()
             continue;
         }
 
-        Console.WriteLine("Informe o email do cliente:");
-        clientes.email = Console.ReadLine();
+        Console.WriteLine("Informe o Email do cliente:");
+        clientes.Email = Console.ReadLine();
 
-        Console.WriteLine($"Cliente {clientes.nome} com email {clientes.email} e o CPF: {clientes.cpf_cnpj} cadastrado com sucesso!\n");
+        Console.WriteLine($"Cliente {clientes.Nome} com Email {clientes.Email} e o CPF: {clientes.Cpf_cnpj} cadastrado com sucesso!\n");
         Console.WriteLine("Deseja cadastrar outro cliente? (1 - Sim / 2 - Não)");
 
         // Adiciona o cliente à lista
@@ -149,7 +149,7 @@ void buscarCliCpf()
     // Procurar o cliente na lista pelo CPF
     foreach (Cliente cliente in listaClientes)
     {
-        if (cliente.cpf_cnpj == cpfBusca)
+        if (cliente.Cpf_cnpj == cpfBusca)
         {
             clienteEncontrado = cliente;
             break;
@@ -188,7 +188,7 @@ void removerClientes()
     // Procurar o cliente na lista pelo CPF
     foreach (Cliente cliente in listaClientes)
     {
-        if (cliente.cpf_cnpj == cpfRemover)
+        if (cliente.Cpf_cnpj == cpfRemover)
         {
             clienteEncontrado = cliente;
             break;
@@ -199,7 +199,7 @@ void removerClientes()
     if (clienteEncontrado != null)
     {
         listaClientes.Remove(clienteEncontrado);
-        Console.WriteLine($"\nCliente: {clienteEncontrado.nome} removido com sucesso!");
+        Console.WriteLine($"\nCliente: {clienteEncontrado.Nome} removido com sucesso!");
     }
 
     else
