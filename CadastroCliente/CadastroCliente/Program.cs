@@ -40,7 +40,13 @@ void exibirMenu()
 
     Console.WriteLine("\nInforme a Opção desejada");
 
-    int opcoes = int.Parse(Console.ReadLine());
+    if (!int.TryParse(Console.ReadLine(), out int opcoes))
+    {
+        Console.WriteLine("Opção inválida.");
+        Thread.Sleep(1000);
+        exibirMenu();
+        return;
+    }
 
     switch (opcoes)
     {
